@@ -1,8 +1,11 @@
 <template>
-  <div>this is App</div>
+  <div>
+    <div>this is App11</div>
+  </div>
 </template>
 
 <script>
+import img from './assets/styles/test.css'
 export default {
   name: 'App'
 }
