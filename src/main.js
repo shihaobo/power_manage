@@ -6,3 +6,6 @@ import App from './App.vue'
 new Vue({
   render: h => h(App)
 }).$mount('#app')
+
+const arr = [1, 3, 5].map(item => item + 1)
+console.log(arr)
