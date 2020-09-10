@@ -3,18 +3,26 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+function resolve(dir) {
+  return path.resolve(__dirname, `../${dir}`)
+}
+
 module.exports = {
   entry: './src/main.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, '../dist')
+    path: resolve('dist')
+  },
+  resolve: {
+    alias: {
+      '@': resolve('src')
+    }
   },
   module: {
-    rules: [
-      { 
-        test: /\.js$/, 
-        exclude: /node_modules/, 
-        loader: "babel-loader" 
+    rules: [{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
       },
       {
         test: /\.vue$/,
@@ -48,11 +56,17 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2
+              importLoaders: 3
             }
           },
           'postcss-loader',
-          'less-loader'
+          'less-loader',
+          {
+            loader: 'sass-resources-loader',
+            options:{
+              resources: resolve('src/assets/styles/variables.less')
+            }
+          }
         ]
       }
     ]
