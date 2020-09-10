@@ -1,7 +1,7 @@
 // 一、创建Vue根实例
 import Vue from 'vue'
 
-import '@/assets/styles/index.less' // global css
+import './assets/styles/index.less' // global css
 
 import App from './App.vue'
 

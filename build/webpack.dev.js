@@ -1,3 +1,4 @@
+const path = require('path')
 const webpack = require('webpack')
 
 const { merge } = require('webpack-merge')
@@ -7,7 +8,9 @@ const devConfig = {
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   devServer: {
+    contentBase: path.join(__dirname, "../dist"),
     open: true,
+    overlay: true,
     hot: true
   },
   plugins: [
