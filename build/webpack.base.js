@@ -104,6 +104,12 @@ module.exports = {
       }
     ]
   },
+  optimization:{ 
+    usedExports: true, // Tree Shaking 模块按需引入
+    splitChunks:{ //代码分割
+      chunks: 'all'
+    }
+  },
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
