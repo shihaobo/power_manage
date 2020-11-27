@@ -1,3 +1,13 @@
 {
-  "presets": ["@babel/preset-env"]
+  "presets": [
+    [
+      "@babel/preset-env", {
+        "targets": { //代码运行环境，是否注入一些函数，用于转换es6 => es5
+          "chrome": "67",
+          "ie": "11"
+				},
+        "useBuiltIns": "usage"  //根据代码，按需引入polyfill
+      }
+    ]
+  ]
 }
