@@ -1,6 +1,12 @@
 <template>
   <Header class="main-header">
     <h1>权限管理</h1>
+    <ul>
+      <li>babelrc</li>
+      <li>Tree Shaking</li>
+      <li>代码分割</li>
+      <li>css分割，压缩</li>
+    </ul>
   </Header>
 </template>
 

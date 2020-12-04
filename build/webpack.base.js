@@ -2,6 +2,9 @@ const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin //代码分析
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); //css分割
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); //css压缩
 
 function resolve(dir) {
   return path.resolve(__dirname, `../${dir}`)
@@ -10,7 +13,8 @@ function resolve(dir) {
 module.exports = {
   entry: './src/main.js',
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].[contenthash].js',
     path: resolve('dist')
   },
   resolve: {
@@ -72,10 +76,14 @@ module.exports = {
     ]
   },
   optimization:{ 
+    runtimeChunk: {
+			name: 'runtime'
+		},
     usedExports: true, // Tree Shaking 模块按需引入
     splitChunks:{ //代码分割
       chunks: 'all'
-    }
+    },
+    minimizer:[new OptimizeCSSAssetsPlugin({})]
   },
   plugins: [
     new VueLoaderPlugin(),
@@ -83,5 +91,10 @@ module.exports = {
       template: './index.html'
     }),
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].chunk.css',
+    })
   ]
 }
